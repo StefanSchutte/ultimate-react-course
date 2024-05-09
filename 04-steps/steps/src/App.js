@@ -1,11 +1,20 @@
 import { useState } from "react";
 
+/**
+ * Array of messages corresponding to each step.
+ * @type {string[]}
+ */
 const messages = [
   "Learn React ⚛️",
   "Apply for jobs 💼",
   "Invest your new income 🤑",
 ];
 
+/**
+ * Main component of the application.
+ * Renders steps, step messages, and navigation buttons.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function App() {
   return (
     <div>
@@ -23,16 +32,26 @@ export default function App() {
   );
 }
 
+/**
+ * Component representing the steps, including navigation buttons.
+ * @returns {JSX.Element} The rendered component.
+ */
 function Steps() {
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(true);
 
   // const [test, setTest] = useState({ name: "Jonas" });
 
+    /**
+     * Handles the navigation to the previous step.
+     */
   function handlePrevious() {
     if (step > 1) setStep((s) => s - 1);
   }
 
+    /**
+     * Handles the navigation to the next step.
+     */
   function handleNext() {
     if (step < 3) {
       setStep((s) => s + 1);
@@ -87,6 +106,13 @@ function Steps() {
   );
 }
 
+/**
+ * Component representing the message for a specific step.
+ * @param {Object} props - The props passed to the component.
+ * @param {number} props.step - The current step number.
+ * @param {JSX.Element[]} props.children - The child components to render.
+ * @returns {JSX.Element} The rendered component.
+ */
 function StepMessage({ step, children }) {
   return (
     <div className="message">
@@ -96,6 +122,15 @@ function StepMessage({ step, children }) {
   );
 }
 
+/**
+ * Component representing a button.
+ * @param {Object} props - The props passed to the component.
+ * @param {string} props.textColor - The color of the button text.
+ * @param {string} props.bgColor - The background color of the button.
+ * @param {Function} props.onClick - The function to call on button click.
+ * @param {JSX.Element[]} props.children - The child components to render within the button.
+ * @returns {JSX.Element} The rendered button component.
+ */
 function Button({ textColor, bgColor, onClick, children }) {
   return (
     <button
