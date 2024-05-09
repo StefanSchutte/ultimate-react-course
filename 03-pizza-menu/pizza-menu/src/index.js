@@ -47,6 +47,21 @@ const pizzaData = [
   },
 ];
 
+/**
+ * Represents data for different pizza options.
+ * @typedef {Object} PizzaData
+ * @property {string} name - The name of the pizza.
+ * @property {string} ingredients - The ingredients of the pizza.
+ * @property {number} price - The price of the pizza.
+ * @property {string} photoName - The name of the photo representing the pizza.
+ * @property {boolean} soldOut - Indicates if the pizza is sold out.
+ */
+
+/**
+ * The main component of the application.
+ * Renders a container div with Header, Menu, and Footer components.
+ * @returns {JSX.Element} The rendered component.
+ */
 function App() {
   return (
     <div className="container">
@@ -57,6 +72,10 @@ function App() {
   );
 }
 
+/**
+ * Renders the header of the page with the title "Fast React Pizza Co.".
+ * @returns {JSX.Element} The rendered header component.
+ */
 function Header() {
   // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
   const style = {};
@@ -68,6 +87,11 @@ function Header() {
   );
 }
 
+/**
+ * Renders the menu section of the page.
+ * Displays a list of pizzas from the pizzaData array.
+ * @returns {JSX.Element} The rendered menu component.
+ */
 function Menu() {
   const pizzas = pizzaData;
   // const pizzas = [];
@@ -110,6 +134,12 @@ function Menu() {
   );
 }
 
+/**
+ * Renders a single pizza item.
+ * @param {Object} props - The props passed to the component.
+ * @param {PizzaData} props.pizzaObj - The pizza object containing details about the pizza.
+ * @returns {JSX.Element} The rendered pizza component.
+ */
 function Pizza({ pizzaObj }) {
   console.log(pizzaObj);
 
@@ -134,6 +164,10 @@ function Pizza({ pizzaObj }) {
   );
 }
 
+/**
+ * Renders the footer of the page.
+ * @returns {JSX.Element} The rendered footer component.
+ */
 function Footer() {
   const hour = new Date().getHours();
   const openHour = 12;
@@ -161,6 +195,13 @@ function Footer() {
   // return React.createElement("footer", null, "We're currently open!");
 }
 
+/**
+ * Renders the order section of the footer.
+ * @param {Object} props - The props passed to the component.
+ * @param {number} props.closeHour - The closing hour of the restaurant.
+ * @param {number} props.openHour - The opening hour of the restaurant.
+ * @returns {JSX.Element} The rendered order component.
+ */
 function Order({ closeHour, openHour }) {
   return (
     <div className="order">

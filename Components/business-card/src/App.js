@@ -2,6 +2,57 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 
+const skills = [
+    {
+        skill: "HTML+CSS",
+        level: "advanced",
+        color: "#2662EA"
+    },
+    {
+        skill: "JavaScript",
+        level: "advanced",
+        color: "#EFD81D"
+    },
+    {
+        skill: "Web Design",
+        level: "advanced",
+        color: "#C3DCAF"
+    },
+    {
+        skill: "Git and GitHub",
+        level: "intermediate",
+        color: "#E84F33"
+    },
+    {
+        skill: "React",
+        level: "advanced",
+        color: "#60DAFB"
+    },
+    {
+        skill: "TypeScript",
+        level: "beginner",
+        color: "#FF3B00"
+    },
+    {
+        skill: "Vue",
+        level: "advanced",
+        color: "#60DAFB"
+    },
+];
+
+/**
+* Represents the skills data for the SkillList component.
+* @typedef {Object} SkillData
+* @property {string} skill - The name of the skill.
+* @property {string} level - The proficiency level of the skill (beginner, intermediate, advanced).
+* @property {string} color - The color associated with the skill.
+*/
+
+/**
+ * The main component of the application.
+ * Renders a card with user information and a list of skills.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function App() {
   return (
       <div className="card">
@@ -19,10 +70,18 @@ export default function App() {
   );
 }
 
+/**
+ * Renders the avatar image.
+ * @returns {JSX.Element} The rendered avatar component.
+ */
 function Avatar() {
   return <img className="avatar" src="/IMG.JPG" alt="Jonas Schmedtmann"/>;
 }
 
+/**
+ * Renders the introduction section.
+ * @returns {JSX.Element} The rendered introduction component.
+ */
 function Intro() {
   return (
       <div>
@@ -39,26 +98,54 @@ function Intro() {
   );
 }
 
+/**
+ * Renders the list of skills.
+ * @returns {JSX.Element} The rendered skill list component.
+ */
 function SkillList() {
   return (
       <div className="skill-list">
-        <Skill skill="React" emoji="" color="blue" />
-        <Skill skill="HTML+CSS" emoji="" color="orange" />
-        <Skill skill="JavaScript" emoji="" color="yellow" />
-        <Skill skill="Github" emoji="" color="orangered" />
-        <Skill skill="TypeScript" emoji="" color="blue" />
-        <Skill skill="Vue" emoji="" color="green" />
+        {/*<Skill skill="React" emoji="" color="blue" />*/}
+        {/*<Skill skill="HTML+CSS" emoji="" color="orange" />*/}
+        {/*<Skill skill="JavaScript" emoji="" color="yellow" />*/}
+        {/*<Skill skill="Github" emoji="" color="orangered" />*/}
+        {/*<Skill skill="TypeScript" emoji="" color="blue" />*/}
+        {/*<Skill skill="Vue" emoji="" color="green" />*/}
+          {skills.map((skill) => (
+              <Skill skill={skill.skill} color={skill.color} level={skill.level} />
+          ))}
       </div>
   );
 }
 
-function Skill(props) {
-  return (
-      <div className="skill" style={{ backgroundColor: props.color }}>
-        <span>{props.skill}</span>
-        <span>{props.emoji}</span>
-      </div>
-  );
+// function Skill(props) {
+//   return (
+//       <div className="skill" style={{ backgroundColor: props.color }}>
+//         <span>{props.skill}</span>
+//         <span>{props.emoji}</span>
+//       </div>
+//   );
+// }
+
+/**
+ * Renders a single skill item.
+ * @param {Object} props - The props passed to the component.
+ * @param {string} props.skill - The name of the skill.
+ * @param {string} props.color - The color associated with the skill.
+ * @param {string} props.level - The proficiency level of the skill.
+ * @returns {JSX.Element} The rendered skill component.
+ */
+function Skill({ skill, color, level }) {
+    return (
+        <div className="skill" style={{ backgroundColor: color }}>
+            <span>{skill}</span>
+            <span>
+        {level === "beginner" && "👶"}
+                {level === "intermediate" && "👍"}
+                {level === "advanced" && "💪"}
+      </span>
+        </div>
+    );
 }
 
 const rootElement = document.getElementById("root");
