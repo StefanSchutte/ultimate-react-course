@@ -1,9 +1,19 @@
 import { useState } from "react";
 
+/**
+ * Form component for adding items.
+ * @param {Object} props - Component props.
+ * @param {Function} props.onAddItems - Function to handle adding items.
+ * @returns {JSX.Element} Form component JSX.
+ */
 export default function Form({ onAddItems }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
+    /**
+     * Handles form submission.
+     * @param {Event} e - The submit event.
+     */
   function handleSubmit(e) {
     e.preventDefault();
 
