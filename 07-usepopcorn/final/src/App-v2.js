@@ -48,11 +48,20 @@ const tempWatchedData = [
   },
 ];
 
+/**
+ * Calculates the average of an array of numbers.
+ * @param {number[]} arr - Array of numbers.
+ * @returns {number} The average of the numbers in the array.
+ */
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-const KEY = "f84fc31d";
+const KEY = "";
 
+/**
+ * Main App component.
+ * @returns {JSX.Element} The App component.
+ */
 export default function App() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -80,18 +89,33 @@ export default function App() {
   console.log("During render");
 */
 
+  /**
+   * Handles the selection of a movie.
+   * @param {string} id - The IMDb ID of the selected movie.
+   */
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
 
+  /**
+   * Handles the closing of the movie details view.
+   */
   function handleCloseMovie() {
     setSelectedId(null);
   }
 
+  /**
+   * Adds a movie to the watched list.
+   * @param {Object} movie - The movie to add.
+   */
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
   }
 
+  /**
+   * Deletes a movie from the watched list.
+   * @param {string} id - The IMDb ID of the movie to delete.
+   */
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
@@ -184,10 +208,20 @@ export default function App() {
   );
 }
 
+/**
+ * Loader component for displaying a loading message.
+ * @returns {JSX.Element} The Loader component.
+ */
 function Loader() {
   return <p className="loader">Loading...</p>;
 }
 
+/**
+ * ErrorMessage component for displaying error messages.
+ * @param {Object} props - The component props.
+ * @param {string} props.message - The error message to display.
+ * @returns {JSX.Element} The ErrorMessage component.
+ */
 function ErrorMessage({ message }) {
   return (
     <p className="error">
@@ -196,6 +230,12 @@ function ErrorMessage({ message }) {
   );
 }
 
+/**
+ * NavBar component for the navigation bar.
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The children components.
+ * @returns {JSX.Element} The NavBar component.
+ */
 function NavBar({ children }) {
   return (
     <nav className="nav-bar">
@@ -205,6 +245,10 @@ function NavBar({ children }) {
   );
 }
 
+/**
+ * Logo component for displaying the logo.
+ * @returns {JSX.Element} The Logo component.
+ */
 function Logo() {
   return (
     <div className="logo">
@@ -214,6 +258,13 @@ function Logo() {
   );
 }
 
+/**
+ * Search component for searching movies.
+ * @param {Object} props - The component props.
+ * @param {string} props.query - The search query.
+ * @param {Function} props.setQuery - The function to set the search query.
+ * @returns {JSX.Element} The Search component.
+ */
 function Search({ query, setQuery }) {
   return (
     <input
@@ -226,6 +277,12 @@ function Search({ query, setQuery }) {
   );
 }
 
+/**
+ * NumResults component for displaying the number of search results.
+ * @param {Object} props - The component props.
+ * @param {Object[]} props.movies - The list of movies.
+ * @returns {JSX.Element} The NumResults component.
+ */
 function NumResults({ movies }) {
   return (
     <p className="num-results">
@@ -234,10 +291,22 @@ function NumResults({ movies }) {
   );
 }
 
+/**
+ * Main component for the main content area.
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The children components.
+ * @returns {JSX.Element} The Main component.
+ */
 function Main({ children }) {
   return <main className="main">{children}</main>;
 }
 
+/**
+ * Box component for containing other components with a toggleable visibility.
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The children components.
+ * @returns {JSX.Element} The Box component.
+ */
 function Box({ children }) {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -277,6 +346,13 @@ function WatchedBox() {
 }
 */
 
+/**
+ * MovieList component for displaying a list of movies.
+ * @param {Object} props - The component props.
+ * @param {Object[]} props.movies - The list of movies.
+ * @param {Function} props.onSelectMovie - Function to handle movie selection.
+ * @returns {JSX.Element} The MovieList component.
+ */
 function MovieList({ movies, onSelectMovie }) {
   return (
     <ul className="list list-movies">
@@ -287,6 +363,13 @@ function MovieList({ movies, onSelectMovie }) {
   );
 }
 
+/**
+ * Movie component for displaying a single movie.
+ * @param {Object} props - The component props.
+ * @param {Object} props.movie - The movie data.
+ * @param {Function} props.onSelectMovie - Function to handle movie selection.
+ * @returns {JSX.Element} The Movie component.
+ */
 function Movie({ movie, onSelectMovie }) {
   return (
     <li onClick={() => onSelectMovie(movie.imdbID)}>
@@ -302,6 +385,15 @@ function Movie({ movie, onSelectMovie }) {
   );
 }
 
+/**
+ * MovieDetails component for displaying details of a selected movie.
+ * @param {Object} props - The component props.
+ * @param {string} props.selectedId - The IMDb ID of the selected movie.
+ * @param {Function} props.onCloseMovie - Function to close the movie details view.
+ * @param {Function} props.onAddWatched - Function to add a movie to the watched list.
+ * @param {Object[]} props.watched - List of watched movies.
+ * @returns {JSX.Element} The MovieDetails component.
+ */
 function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -325,6 +417,11 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     Genre: genre,
   } = movie;
 
+
+  /**
+   * Handles the submission of user rating.
+   * @param {number} rating - The user rating.
+   */
   function handleAdd() {
     const newWatchedMovie = {
       imdbID: selectedId,
@@ -357,6 +454,9 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     [onCloseMovie]
   );
 
+  /**
+   * Fetches the movie details from the API.
+   */
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -442,6 +542,12 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   );
 }
 
+/**
+ * WatchedSummary component for displaying a summary of watched movies.
+ * @param {Object} props - The component props.
+ * @param {Object[]} props.watched - List of watched movies.
+ * @returns {JSX.Element} The WatchedSummary component.
+ */
 function WatchedSummary({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
@@ -472,6 +578,13 @@ function WatchedSummary({ watched }) {
   );
 }
 
+/**
+ * WatchedMoviesList component for displaying a list of watched movies.
+ * @param {Object} props - The component props.
+ * @param {Object[]} props.watched - List of watched movies.
+ * @param {Function} props.onDeleteWatched - Function to delete a movie from the watched list.
+ * @returns {JSX.Element} The WatchedMoviesList component.
+ */
 function WatchedMoviesList({ watched, onDeleteWatched }) {
   return (
     <ul className="list">
@@ -486,6 +599,13 @@ function WatchedMoviesList({ watched, onDeleteWatched }) {
   );
 }
 
+/**
+ * WatchedMovie component for displaying a single watched movie.
+ * @param {Object} props - The component props.
+ * @param {Object} props.movie - The movie data.
+ * @param {Function} props.onDeleteWatched - Function to delete the movie from the watched list.
+ * @returns {JSX.Element} The WatchedMovie component.
+ */
 function WatchedMovie({ movie, onDeleteWatched }) {
   return (
     <li>
