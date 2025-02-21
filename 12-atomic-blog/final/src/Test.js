@@ -36,7 +36,7 @@ export default function Test() {
   //     <SlowComponent />
   //   </div>
   // );
-
+    
   return (
     <div>
       <h1>Slow counter?!?</h1>
